@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小狗和Daddy的世界</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>欢迎来到小狗和Daddy的世界</h1>
+        <p>记录我们的点点滴滴</p>
+    </header>
+
+    <!-- 恋爱计时器 -->
+    <section id="love-timer">
+        <h2>我们的恋爱已经持续了：</h2>
+        <div id="timer">0天 0小时 0分钟</div>
+    </section>
+
+    <!-- 今日天气与日期 -->
+    <section id="weather">
+        <h2>今日天气 & 日期</h2>
+        <p id="today-date">2025-02-08</p>
+        <p id="today-weather">晴 22°C</p>
+    </section>
+
+    <!-- 便签快捷入口 -->
+    <section id="note-shortcut">
+        <h2>便签记录</h2>
+        <button onclick="location.href='note.html'">进入便签</button>
+    </section>
+
+    <!-- 语音留言入口 -->
+    <section id="voice-messages">
+        <h2>语音留言</h2>
+        <button onclick="recordVoiceMessage()">录制留言</button>
+        <button onclick="playVoiceMessage()">播放留言</button>
+    </section>
+
+    <!-- Daddy的每日一句 -->
+    <section id="daily-message">
+        <h2>今日Daddy的每日一句</h2>
+        <p id="message">我爱你，宝贝</p>
+    </section>
+
+    <footer>
+        <p>小狗和Daddy | 版权所有</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

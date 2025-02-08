@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纪念日日历</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>纪念日日历</h1>
+    </header>
+
+    <section id="calendar">
+        <h2>查看纪念日</h2>
+        <div id="calendar-grid">
+            <!-- 日历内容将在这里动态渲染 -->
+        </div>
+    </section>
+
+    <footer>
+        <p>小狗和Daddy | 版权所有</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

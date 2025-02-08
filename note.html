@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>便签记录</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>便签记录</h1>
+    </header>
+
+    <!-- 上屏：查看过往便签 -->
+    <section id="previous-notes">
+        <h2>历史便签</h2>
+        <div id="note-display">
+            <!-- 这里将显示过往便签 -->
+        </div>
+    </section>
+
+    <!-- 下屏：输入新便签 -->
+    <section id="new-note">
+        <h2>新便签</h2>
+        <textarea id="note-input" placeholder="写下今天的心情..."></textarea>
+        <button onclick="addNote()">保存便签</button>
+    </section>
+
+    <footer>
+        <p>小狗和Daddy | 版权所有</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
