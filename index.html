@@ -1,53 +1,47 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>小狗和Daddy的世界</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- 引入样式表 -->
 </head>
 <body>
-    <header>
-        <h1>欢迎来到小狗和Daddy的世界</h1>
-        <p>记录我们的点点滴滴</p>
-    </header>
+    <!-- 首页内容 -->
+    <div id="loveTimer">
+        <h2>恋爱计时器</h2>
+        <p id="timer">加载中...</p>
+    </div>
 
-    <!-- 恋爱计时器 -->
-    <section id="love-timer">
-        <h2>我们的恋爱已经持续了：</h2>
-        <div id="timer">0天 0小时 0分钟</div>
-    </section>
+    <div id="weather">
+        <h2>今日天气</h2>
+        <p id="date"></p>
+        <p id="weatherInfo"></p>
+    </div>
 
-    <!-- 今日天气与日期 -->
-    <section id="weather">
-        <h2>今日天气 & 日期</h2>
-        <p id="today-date">2025-02-08</p>
-        <p id="today-weather">晴 22°C</p>
-    </section>
-
-    <!-- 便签快捷入口 -->
-    <section id="note-shortcut">
-        <h2>便签记录</h2>
-        <button onclick="location.href='note.html'">进入便签</button>
-    </section>
-
-    <!-- 语音留言入口 -->
-    <section id="voice-messages">
+    <div id="voiceMessage">
         <h2>语音留言</h2>
-        <button onclick="recordVoiceMessage()">录制留言</button>
-        <button onclick="playVoiceMessage()">播放留言</button>
-    </section>
+        <button id="recordButton">开始录音</button>
+        <audio id="audioPlayer" controls></audio>
+    </div>
 
-    <!-- Daddy的每日一句 -->
-    <section id="daily-message">
-        <h2>今日Daddy的每日一句</h2>
-        <p id="message">我爱你，宝贝</p>
-    </section>
+    <div id="pixelCanvas">
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <input type="color" id="colorPicker" value="#000000" />
+        <button onclick="saveDrawing()">保存画作</button>
+    </div>
 
-    <footer>
-        <p>小狗和Daddy | 版权所有</p>
-    </footer>
+    <button id="myButton">点击我！</button>
 
-    <script src="script.js"></script>
+    <div id="calendar">
+        <h2>日历</h2>
+        <div id="calendarDays">
+            <button class="date" data-date="2025-02-14">14</button>
+            <button class="date" data-date="2025-02-15">15</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!-- 引入JavaScript文件 -->
 </body>
 </html>

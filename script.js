@@ -1,51 +1,96 @@
-// 恋爱计时器
-function updateLoveTimer() {
-    const startTime = new Date('2024-01-01'); // 恋爱开始时间
+// 恋爱计时器代码
+const loveStartDate = new Date("2025-01-01");
+const timerElement = document.getElementById("timer");
+
+function updateTimer() {
     const now = new Date();
-    const diff = now - startTime; // 计算时间差
-
+    const diff = now - loveStartDate;
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
-    document.getElementById('timer').textContent = `${days}天 ${hours}小时 ${minutes}分钟`;
+    timerElement.textContent = `${days} 天`;
 }
 
-// 更新天气与日期（可以通过API来实现）
-function updateWeather() {
-    const today = new Date();
-    document.getElementById('today-date').textContent = today.toLocaleDateString();
+setInterval(updateTimer, 1000);
 
-    // 假设这里返回的是一个天气API的数据
-    document.getElementById('today-weather').textContent = '晴 22°C';
+// 天气更新功能
+const dateElement = document.getElementById("date");
+const weatherElement = document.getElementById("weatherInfo");
+
+function updateDateAndWeather() {
+    const now = new Date();
+    dateElement.textContent = now.toDateString();
+
+    fetch('https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=YOUR_CITY')
+        .then(response => response.json())
+        .then(data => {
+            weatherElement.textContent = `天气：${data.current.condition.text}, 温度：${data.current.temp_c}°C`;
+        });
 }
 
-// 添加留言到留言板
-function addNote() {
-    let noteText = document.getElementById("note-input").value;
-    let noteDiv = document.createElement("div");
-    noteDiv.classList.add("note");
-    noteDiv.innerText = noteText;
-    document.getElementById("note-display").appendChild(noteDiv);
-    document.getElementById("note-input").value = "";
+updateDateAndWeather();
+setInterval(updateDateAndWeather, 3600000);
+
+// 语音留言录制
+let mediaRecorder;
+let audioChunks = [];
+
+const recordButton = document.getElementById("recordButton");
+const audioPlayer = document.getElementById("audioPlayer");
+
+recordButton.addEventListener('click', () => {
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+        recordButton.textContent = "开始录音";
+    } else {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    audioPlayer.src = audioUrl;
+                    audioChunks = [];
+                };
+                mediaRecorder.start();
+                recordButton.textContent = "停止录音";
+            })
+            .catch(error => {
+                alert("无法访问麦克风：" + error);
+            });
+    }
+});
+
+// 画板功能
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const colorPicker = document.getElementById("colorPicker");
+let painting = false;
+
+canvas.addEventListener('mousedown', () => painting = true);
+canvas.addEventListener('mouseup', () => painting = false);
+canvas.addEventListener('mousemove', (event) => {
+    if (painting) {
+        ctx.fillStyle = colorPicker.value;
+        ctx.fillRect(event.offsetX, event.offsetY, 10, 10);
+    }
+});
+
+function saveDrawing() {
+    const drawing = canvas.toDataURL();
+    const link = document.createElement('a');
+    link.href = drawing;
+    link.download = 'pixel-drawing.png';
+    link.click();
 }
 
-// 启动语音录制
-function startRecording() {
-    alert("开始录音..."); // 实际录音逻辑可以使用Web Audio API或其他库实现
-}
-
-// 播放留言
-function playMessage() {
-    alert("播放语音留言...");
-}
-
-// 切换像素画板显示
-function togglePixelArt() {
-    let board = document.getElementById('pixel-art-board');
-    board.style.display = (board.style.display === 'none') ? 'block' : 'none';
-}
-
-// 初始化
-updateLoveTimer();
-updateWeather();
+// 花朵纪念日
+document.querySelectorAll('.date').forEach(button => {
+    button.addEventListener('click', (event) => {
+        const date = event.target.dataset.date;
+        if (date === "2025-02-14") {
+            event.target.textContent = '🌸';
+        }
+    });
+});
